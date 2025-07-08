@@ -1,6 +1,7 @@
 package ch.makery.address
 
 import ch.makery.address.model.Person
+import ch.makery.address.view.PersonEditDialogController
 import javafx.fxml.FXMLLoader
 import javafx.scene as jfxs
 import scalafx.Includes.*
@@ -9,6 +10,7 @@ import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.beans.property.StringProperty
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.Scene
+import scalafx.stage.{Modality, Stage}
 
 object MainApp extends JFXApp3:
 
@@ -87,5 +89,27 @@ object MainApp extends JFXApp3:
 
 //  val func1 : Int => Int = (_) =>
 //    1
-//    println(func1(8))
+//    println(func1(8)
+  def showPersonEditDialog(person: Person): Boolean =
+    val resource = getClass.getResource("view/PersonEditDialog.fxml")
+    val loader = new FXMLLoader(resource)
+    loader.load();
+    val roots2 = loader.getRoot[jfxs.Parent]
+    val control = loader.getController[PersonEditDialogController]
+
+    val dialog = new Stage():
+      initModality(Modality.ApplicationModal)
+      initOwner(stage)
+      scene = new Scene:
+        root = roots2
+  //controller has a cancel so it needs a window object,
+        //behaviour of closing object is window object
+    control.dialogStage = dialog
+    control.person = person
+    dialog.showAndWait()
+    control.okClicked
+  //window will pop up and wait for user to click ok or cancel
+  //show and wait will block the main thread until the dialog is closed
+
+
 
