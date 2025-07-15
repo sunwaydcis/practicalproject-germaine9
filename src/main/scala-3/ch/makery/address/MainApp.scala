@@ -10,6 +10,7 @@ import scalafx.application.JFXApp3.PrimaryStage
 import scalafx.beans.property.StringProperty
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.Scene
+import scalafx.scene.image.Image
 import scalafx.stage.{Modality, Stage}
 
 object MainApp extends JFXApp3:
@@ -52,6 +53,7 @@ object MainApp extends JFXApp3:
 
     stage = new PrimaryStage():
       title = "AddressApp"
+      icons += new Image(getClass.getResource("/images/img.png").toExternalForm)
       scene = new Scene():
         root = roots.get
         stylesheets = Seq(cssResource.toExternalForm)
