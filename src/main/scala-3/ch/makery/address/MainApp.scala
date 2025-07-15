@@ -17,6 +17,8 @@ object MainApp extends JFXApp3:
   //Window Root Pane
   var roots: Option[scalafx.scene.layout.BorderPane] = None
 
+  var cssResource = getClass.getResource("view/DarkTheme.css")
+
   /**
    * The data as an observable list of Persons.
    */
@@ -52,6 +54,7 @@ object MainApp extends JFXApp3:
       title = "AddressApp"
       scene = new Scene():
         root = roots.get
+        stylesheets = Seq(cssResource.toExternalForm)
 
     // call to display PersonOverview when app start
     showPersonOverview()
@@ -102,6 +105,7 @@ object MainApp extends JFXApp3:
       initOwner(stage)
       scene = new Scene:
         root = roots2
+        stylesheets = Seq(cssResource.toExternalForm)
   //controller has a cancel so it needs a window object,
         //behaviour of closing object is window object
     control.dialogStage = dialog
